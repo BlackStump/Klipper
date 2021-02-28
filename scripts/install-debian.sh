@@ -79,7 +79,9 @@ install_script1()
 #Systemd service file for klipper-linux-host-mcu
 [Unit]
 Description=klipper linux host
-PartOf=klipper.service
+Requires=klipper.service
+After=klipper.service
+BindsTo=klipper.service
 
 [Service]
 Type=simple
@@ -89,7 +91,7 @@ Restart=always
 RestartSec=5
 
 [Install]
-WantedBy=multi-user.target
+WantedBy=klipper.service
 EOF
 # Use systemctl to enable the klipper systemd service script
     sudo systemctl enable klipper_host_mcu.service
